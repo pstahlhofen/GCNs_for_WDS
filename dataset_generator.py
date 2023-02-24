@@ -54,7 +54,7 @@ class LeakDatasetCreator:
         self.wn = wntr.network.WaterNetworkModel(inp_file)
         self.wn.options.hydraulic.demand_model = Mode_Simulation
 
-        self.nodes = self.wn.to_graph().nodes()
+        self.nodes = self.wn.get_graph().nodes()
         self.links = self.wn.link_name_list
 
         for name, node in self.wn.junctions():
@@ -106,7 +106,7 @@ class LeakDatasetCreator:
                     node_id = self.wn.node_name_list[j]
                     if node_id in pressure_sensors:
                         pres = results.node['pressure'][node_id]
-                        pres = pres[:len(self.time_stamp)]
+                        pres = pres.iloc[:len(self.time_stamp)]
                         pres = [round(elem, decimal_size) for elem in pres]
                         total_pressures[node_id] = pres
 
