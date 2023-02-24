@@ -35,7 +35,7 @@ def train(X_tv, edge_indices, edge_attr, model, installed_sensors, args, save_di
     val_loader = DataLoader(tv_dataset[idx_train:], batch_size=args.batch_size, shuffle=True)
     
     """ Train-validation loop """
-    for epoch in tqdm(range(n_epochs)): 
+    for epoch in range(n_epochs): 
 
         train_losses = []
         for batch in train_loader:             

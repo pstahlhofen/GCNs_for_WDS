@@ -156,7 +156,7 @@ def run(args):
         wdn_graph.X, wdn_graph.edge_attr = normalize(wdn_graph.X, _min=X_min, _max=X_max), normalize(wdn_graph.edge_attr, dim=1)
 
         """ Creating train-val-test data based on the specified number of samples. """
-        X_test = wdn_graph.X[n_samples:]
+        X_test = wdn_graph.X
 
         """ Evaluating """
         Y, Y_hat, test_losses  = test(X_test, wdn_graph.edge_indices, wdn_graph.edge_attr, model, installed_sensors, args, save_dir, out_f)

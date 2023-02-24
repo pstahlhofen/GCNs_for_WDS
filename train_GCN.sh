@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python run.py
+python run.py --n_days 5
