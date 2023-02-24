@@ -118,8 +118,8 @@ def run(args):
 
     if args.mode == 'train_test':
         """ Creating Graph for L-Town WDN from the data files. """
-        inp_file = "networks/L-Town/Toy/L-TOWN.inp"
-        path_to_data = "networks/L-Town/Toy/Measurements_All_Pressures.csv"
+        inp_file = "networks/L-Town/Real/L-TOWN_Real.inp"
+        path_to_data = "networks/L-Town/Real/Measurements_All_Pressures.csv"
         wdn_graph = create_graph(inp_file, path_to_data)   
 
         """ Normalizing pressure values using the limits used for generating the data. """
@@ -129,9 +129,8 @@ def run(args):
         """ Creating train-val-test data based on the specified number of samples. """
         X_tvt = wdn_graph.X[:n_samples]
 
-        """ Creating train-val-test splits. """
-        tv_N = int(0.8 * n_samples)
-        X_tv, X_test = X_tvt[:tv_N, :].clone(), X_tvt[tv_N:n_samples, :].clone()    
+        """ Training and testing on the whole set. """
+        X_tv, X_test = X_tvt.clone(), X_tvt.clone()    
         
         """ Training """
         state, model_path = train(X_tv, wdn_graph.edge_indices, wdn_graph.edge_attr, model, installed_sensors, args, save_dir, out_f)
